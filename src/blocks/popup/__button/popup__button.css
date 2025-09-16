@@ -25,3 +25,13 @@
     line-height: 17px;
   }
 }
+
+.button_inactive {
+  background-color: #bdbdbd;
+  color: #ffffff;
+  cursor: not-allowed;
+  opacity: 0.9;
+  box-shadow: none;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+

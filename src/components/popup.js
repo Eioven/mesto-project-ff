@@ -1,13 +1,38 @@
+import { popupsArray } from "./const.js";
+
+function handleEscClick(evt) {
+    if (evt.key === "Escape") {
+        const openedPopup = popupsArray.find((popup) =>
+            popup.classList.contains("popup_is-opened")
+        );
+        if (openedPopup) {
+            closePopup(openedPopup);
+        }
+    }
+}
+
+function handleOverlayClick(evt) {
+    if (evt.target === evt.currentTarget) {
+        closePopup(evt.target);
+    }
+}
+
+function handleCloseButtonClick(evt) {
+    const button = evt.target;
+    const popup = button.closest(".popup");
+    closePopup(popup);
+}
+
 function openPopup(popup) {
-    popup.classList.add('popup_is-opened');
-    document.addEventListener("keydown", closeEscPopup);
-    popup.addEventListener('click', closeOverlayPopup);
+    popup.classList.add("popup_is-opened");
+    document.addEventListener("keydown", handleEscClick);
 }
 
 function closePopup(popup) {
-    popup.classList.remove('popup_is-opened');
-    document.removeEventListener("keydown", closeEscPopup);
-    popup.removeEventListener('click', closeOverlayPopup);
+    if (popup) {
+        popup.classList.remove("popup_is-opened");
+        document.removeEventListener("keydown", handleEscClick);
+    }
 }
 
 function closePopupEvent(evt) {
@@ -15,17 +40,10 @@ function closePopupEvent(evt) {
     closePopup(openedPopup);
 }
 
-function closeEscPopup(evt) {
-    if (evt.key === "Escape") {
-        const openedPopup = document.querySelector(".popup_is-opened");
-        closePopup(openedPopup);
-    }
-}
-
-function closeOverlayPopup(evt) {
-    if (evt.target === evt.currentTarget) {
-        closePopup(evt.currentTarget);
-    }
-}
-
-export {openPopup, closePopup, closePopupEvent};
+export {
+    handleOverlayClick,
+    closePopup,
+    openPopup,
+    handleCloseButtonClick,
+    closePopupEvent,
+};
