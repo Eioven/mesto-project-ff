@@ -40,6 +40,10 @@ function closePopupEvent(evt) {
     closePopup(openedPopup);
 }
 
+popupsArray.forEach((popup) => {
+    popup.addEventListener("click", handleOverlayClick);
+});
+
 export {
     handleOverlayClick,
     closePopup,
@@ -47,3 +51,5 @@ export {
     handleCloseButtonClick,
     closePopupEvent,
 };
+
+
