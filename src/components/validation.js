@@ -2,7 +2,7 @@ export const validationConfig = {
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
+    inactiveButtonClass: 'button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'form__input-error_active'
 };
@@ -53,17 +53,14 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, validationConfig, formElement) => {
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
 
-    if (!buttonElement) {
-        console.error('Submit button not found in form');
-        return;
-    }
+    if (!buttonElement) return;
 
-    if (hasInvalidInput(inputList)) {
-        buttonElement.setAttribute('disabled', true);
+    if (hasInvalidInput(inputList)) {``
         buttonElement.classList.add(validationConfig.inactiveButtonClass);
+        buttonElement.disabled = true;
     } else {
-        buttonElement.removeAttribute('disabled');
         buttonElement.classList.remove(validationConfig.inactiveButtonClass);
+        buttonElement.disabled = false;
     }
 };
 
