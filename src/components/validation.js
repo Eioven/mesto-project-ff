@@ -93,14 +93,11 @@ function clearValidation(formElement, validationConfig) {
     const inputList = Array.from(
         formElement.querySelectorAll(validationConfig.inputSelector)
     );
-    const buttonElementReturn = formElement.querySelector(
-        validationConfig.submitButtonSelector
-    );
 
     inputList.forEach((inputElement) =>
         hideInputError(formElement, inputElement, validationConfig)
     );
-    toggleButtonState(inputList, validationConfig, buttonElementReturn);
+    toggleButtonState(inputList, validationConfig, formElement);
 }
 
 export { enableValidation as validation, clearValidation };
