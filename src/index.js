@@ -173,41 +173,6 @@ function handleProfileFormSubmit(evt) {
 
 editForm.addEventListener("submit", handleProfileFormSubmit);
 
-function handleCardFormSubmit(evt) {
-    evt.preventDefault();
-
-    const cardContent = {
-        link: cardLinkInput.value,
-        name: cardNameInput.value,
-    };
-
-    const submitButton = evt.target.querySelector(".popup__button");
-    const originalText = submitButton.textContent;
-    submitButton.textContent = "Создание...";
-    submitButton.disabled = true;
-
-    postCard(cardContent.name, cardContent.link)
-        .then((newCardData) => {
-            const newCard = createCard(
-                newCardData,
-                deleteCard,
-                likeCard,
-                openImagePopup,
-                currentUserId
-            );
-            placesList.prepend(newCard);
-            closePopup(newCardForm);
-            evt.target.reset();
-        })
-        .catch((error) => {
-            console.error("Ошибка при создании карточки:", error);
-        })
-        .finally(() => {
-            submitButton.textContent = originalText;
-            submitButton.disabled = false;
-        });
-}
-
 if (newPlaceFormElement) {
     newPlaceFormElement.addEventListener("submit", (evt) => {
         handleNewCardFormSubmit(evt, callbacksObject, currentUserId);
